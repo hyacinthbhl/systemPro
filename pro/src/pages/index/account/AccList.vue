@@ -17,11 +17,13 @@
         <template slot-scope="scope">{{ scope.row.userGroup }}</template>
       </el-table-column>
       <el-table-column prop="address" label="创建时间" show-overflow-tooltip width="300px">
-        <template slot-scope="scope">{{ new Date(scope.row.ctime)
-        .toJSON()
-        .substr(0, 19)
-        .replace("T", " ")
-        }}</template>
+        <template slot-scope="scope">
+          {{ new Date(scope.row.ctime)
+          .toJSON()
+          .substr(0, 19)
+          .replace("T", " ")
+          }}
+        </template>
       </el-table-column>
       <el-table-column label="操作" width="220">
         <template slot-scope="scope">
@@ -30,7 +32,7 @@
         </template>
       </el-table-column>
     </el-table>
-  <!-- 编辑用户信息框 -->
+    <!-- 编辑用户信息框 -->
     <el-dialog title="修改账号信息" :visible.sync="dialogFormVisible">
       <el-form>
         <el-form-item label="账户" :label-width="formLabelWidth">
@@ -45,7 +47,7 @@
       </el-form>
       <div slot="footer" class="dialog-footer">
         <el-button @click="dialogFormVisible = false">取 消</el-button>
-        <el-button type="primary"  @click="edit_user(userdata.id)">确 定</el-button>
+        <el-button type="primary" @click="edit_user(userdata.id)">确 定</el-button>
       </div>
     </el-dialog>
 
@@ -76,21 +78,21 @@ import { API_del_single } from "@/api/apis";
 // 引入批量删除接口API
 import { API_del_all } from "@/api/apis";
 // 引入修改账户信息API
-import { API_edit_account } from "@/api/apis"
+import { API_edit_account } from "@/api/apis";
 export default {
   data() {
     return {
-      oldacc:"",//用户名
-      usergroup:"",//用户组
-      formLabelWidth: "120px",//
+      oldacc: "", //用户名
+      usergroup: "", //用户组
+      formLabelWidth: "120px", //
       // dialogTableVisible: false,
-      dialogFormVisible: false,//编辑框的显示隐藏
-      total: 0,//数据总条数
-      currentPage: 1,//当前页
-      pageSize: 6,//一页显示条数
-      tableData: [],//表格数据
+      dialogFormVisible: false, //编辑框的显示隐藏
+      total: 0, //数据总条数
+      currentPage: 1, //当前页
+      pageSize: 6, //一页显示条数
+      tableData: [], //表格数据
       multipleSelection: 0,
-      delAll: []//选中多条数据id
+      delAll: [] //选中多条数据id
     };
   },
   created() {
@@ -132,49 +134,63 @@ export default {
     },
     // 删除当前
     del_click(userid) {
-      API_del_single(userid).then(res => {
-        if (res.data.code == 0) {
-          this.$message({
-            message: "删除成功!!!",
-            type: "success"
-          });
-          this.select();
-        }
+      this.$confirm("此操作将永久删除该商品, 是否继续?", "提示", {
+        confirmButtonText: "确定",
+        cancelButtonText: "取消",
+        type: "warning"
+      }).then(() => {
+        API_del_single(userid).then(res => {
+          if (res.data.code == 0) {
+            // this.$message({
+            //   message: "删除成功!!!",
+            //   type: "success"
+            // });
+            this.select();
+          }
+        });
       });
+
       // this.tableData.splice(userid)
     },
     // 批量删除
     delAll_click() {
       // console.log(1)
-      var delstr = JSON.stringify(this.delAll);
-      API_del_all(delstr).then(res => {
-        if (res.data.code == 0) {
-          this.$message({
-            message: "删除成功!",
-            type: "success"
-          });
-          this.select();
-        }
+      this.$confirm("此操作将永久删除该商品, 是否继续?", "提示", {
+        confirmButtonText: "确定",
+        cancelButtonText: "取消",
+        type: "warning"
+      }).then(() => {
+        var delstr = JSON.stringify(this.delAll);
+        API_del_all(delstr).then(res => {
+          if (res.data.code == 0) {
+            // this.$message({
+            //   message: "删除成功!",
+            //   type: "success"
+            // });
+            this.select();
+          }
+        });
       });
     },
     // 显示编辑信息框
-    edit_click(alldata) {//当前编辑的数据
-      this.dialogFormVisible = true
+    edit_click(alldata) {
+      //当前编辑的数据
+      this.dialogFormVisible = true;
       // console.log(alldata)
-      this.userdata = alldata//将当前数据挂载到this上
-      this.oldacc = alldata.account
-      this.oldusergroup = alldata.usergroup
+      this.userdata = alldata; //将当前数据挂载到this上
+      this.oldacc = alldata.account;
+      this.oldusergroup = alldata.usergroup;
     },
     // 确认编辑，发送请求
-    edit_user(uid){
-      API_edit_account(uid,this.oldacc,this.usergroup).then((res)=>{
-        if(res.data.code == 0){
-          this.dialogFormVisible = false
-          this.select()
-        }else{
-          this.$message.error('编辑失败，稍后再试!!');
+    edit_user(uid) {
+      API_edit_account(uid, this.oldacc, this.usergroup).then(res => {
+        if (res.data.code == 0) {
+          this.dialogFormVisible = false;
+          this.select();
+        } else {
+          this.$message.error("编辑失败，稍后再试!!");
         }
-      })
+      });
     }
   }
 };

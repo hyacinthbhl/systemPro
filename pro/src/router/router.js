@@ -6,6 +6,11 @@ import { API_token } from '@/api/apis'
 
 Vue.use(VueRouter)
 
+const routerPush = VueRouter.prototype.push
+VueRouter.prototype.push = function push(location) {
+  return routerPush.call(this, location).catch(error=> error)
+}
+
 const router = new VueRouter({
     routes: [
         {
@@ -105,16 +110,14 @@ router.beforeEach((to,from,next)=>{
         API_token(localStorage.token).then(res=>{
             if(res.data.code == 0){
                 // 在登录状态，放行
-                next()
-
-                // 判断管理员权限                
-                // console.log(to.meta.role)
-                // if(to.meta.role.includes(localStorage.role)){
-                //     next()
-                // }else{
-                //     next(from)
-                // }
-                console.log(to.meta.role.includes(localStorage.role))
+                // 判断管理员权限
+                console.log(to.meta.role)
+                if(to.meta.role.indexOf(localStorage.role)>=0){
+                    next()
+                }else{
+                    next(from)
+                }
+                // console.log(to.meta.role.includes(localStorage.role))
             }else{
                 // 不在登录状态，跳转到登录页面
                 next('/')

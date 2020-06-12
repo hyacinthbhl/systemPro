@@ -120,3 +120,18 @@ export const API_edit_goods = (id,orderNo,orderTime,phone,consignee,deliverAddre
 
 // 获取店铺详情
 export const API_get_shops = ()=>  axios.get('/shop/info')
+
+// 店铺内容修改 API_edit_shops
+// id 店铺id
+// name 店铺名称
+// bulletin 店铺公告
+// avatar 店铺头像
+// deliveryPrice 配送费
+// deliveryTime 配送时间
+// description 配送描述
+// score 店铺评分
+// sellCount 销量
+// supports 活动
+// date 营业时间
+// pics 店铺图片
+export const API_edit_shops = (id,name,bulletin,avatar,deliveryPrice,deliveryTime,description,score,sellCount,supports,date,pics) =>  axios.post('/shop/edit',{id,name,bulletin,avatar,deliveryPrice,deliveryTime,description,score,sellCount,supports,date,pics})

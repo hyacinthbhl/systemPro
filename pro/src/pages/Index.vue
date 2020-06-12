@@ -10,7 +10,8 @@
         router
         unique-opened
       >
-        <h5 class="H5_title">XXX外卖管理系统</h5>
+        <img :src="require('../assets/imgs/logo.png')" class="logo" alt="">
+        <h5 class="H5_title">憨憨外卖管理系统</h5>
         <div v-for="item in roletreeList" :key="item.index">
           <!-- 二级菜单 -->
           <el-submenu :index="item.index" v-if="item.children">
@@ -339,6 +340,7 @@ export default {
       text-align: center;
       color: #fff;
       font-weight: bold;
+      margin-left: 30px;
     }
   }
   .el-header {
@@ -381,6 +383,14 @@ export default {
       }
     }
   }
+}
+.logo{
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  position: absolute;
+  left: 8px;
+  top: 27px;
 }
 
 // .el-aside {

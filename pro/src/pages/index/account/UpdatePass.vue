@@ -85,6 +85,7 @@ export default {
               message: "修改密码成功..",
               type: "success"
             });
+            localStorage.token = ""
             setTimeout(() => {
               this.$router.push("/");
             }, 1500);

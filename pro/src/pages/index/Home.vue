@@ -9,21 +9,21 @@
         </div>
       </div>
       <div class="top_article">
-        <img :src="require('../../assets/imgs/order.png')" alt />
+        <img :src="require('../../assets/imgs/price.png')" alt />
         <div>
           <p class="article">总销售额</p>
           <p>{{ totalAmount }}</p>
         </div>
       </div>
       <div class="top_article">
-        <img :src="require('../../assets/imgs/order.png')" alt />
+        <img :src="require('../../assets/imgs/todayorder.png')" alt />
         <div>
           <p class="article">今日订单</p>
           <p>{{ todayOrder }}</p>
         </div>
       </div>
       <div class="top_article">
-        <img :src="require('../../assets/imgs/order.png')" alt />
+        <img :src="require('../../assets/imgs/5.png')" alt />
         <div>
           <p class="article">今日销售额</p>
           <p>{{ totayAmount }}</p>

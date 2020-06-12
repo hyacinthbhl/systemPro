@@ -213,7 +213,7 @@ export default {
     },
     // 订单列表查询
     get_goods_list() {
-      this.date = JSON.stringify(this.date);
+      this.date = JSON.parse(JSON.stringify(this.date));
       API_get_order(
         this.currentPage,
         this.pageSize,
@@ -242,10 +242,6 @@ export default {
     // 部分查询
     query_some() {
       this.get_goods_list();
-      // console.log(this.date)
-      // for(let obj of this.date){
-      //   console.log(JSON.stringify(obj).substr(0, 20).replace("T", " "))
-      // }
     },
     //订单详情弹框
     handleClick(item) {
