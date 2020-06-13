@@ -1,7 +1,7 @@
 <template>
   <div id="main">
     <div class="login">
-      <h2>XX管理系统登录</h2>
+      <h2>憨憨外卖管理系统登录</h2>
       <el-input class="input_name" placeholder="请输入用户名" v-model="name" clearable></el-input>
       <el-input class="input_password" placeholder="请输入密码" v-model="pwd" show-password></el-input>
       <el-button class="login_btn" type="primary" @click="login">登录</el-button>

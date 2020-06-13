@@ -100,19 +100,19 @@ export default {
       treelist: [
         {
           index: "/index/home",
-          iclass: "el-icon-menu",
+          iclass: "el-icon-s-home",
           title: "后台首页",
           role: ["super", "normal"]
         },
         {
           index: "/index/order",
-          iclass: "el-icon-menu",
+          iclass: "el-icon-s-order",
           title: "订单管理",
           role: ["super", "normal"]
         },
         {
           index: "shops",
-          iclass: "el-icon-location",
+          iclass: "el-icon-s-goods",
           title: "商品管理",
           role: ["super", "normal"],
           children: [
@@ -132,13 +132,13 @@ export default {
         },
         {
           index: "/index/shops",
-          iclass: "el-icon-menu",
+          iclass: "el-icon-s-shop",
           title: "店铺管理",
           role: ["super"]
         },
         {
           index: "account",
-          iclass: "el-icon-location",
+          iclass: "el-icon-user-solid",
           title: "账号管理",
           role: ["super"],
           children: [
@@ -158,7 +158,7 @@ export default {
         },
         {
           index: "sale",
-          iclass: "el-icon-menu",
+          iclass: "el-icon-star-on",
           title: "销售统计",
           role: ["super"],
           children: [
